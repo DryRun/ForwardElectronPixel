@@ -13,7 +13,9 @@ from math import *
 def RunTestAnalysis():
 	ROOT.xAOD.Init().ignore()
 	sh = ROOT.SH.SampleHandler()
-	ROOT.SH.ScanDir().sampleDepth(0).samplePattern("user.dryu.mc15_13TeV.361106.e3601_s2576_s2132_r7380.DAOD_IDTRKVALID.test4_EXT0").filePattern("*").scan(sh, "/eliza18/atlas/dryu/ForwardElectrons/Data/")
+	ROOT.SH.ScanDir().sampleDepth(0).samplePattern("user.dryu.mc15_13TeV.361106.e3601_s2576_s2132_r7380.DAOD_IDTRKEL.v1_EXT0").filePattern("*").scan(sh, "/eliza18/atlas/dryu/ForwardElectrons/Data/")
+	#ROOT.SH.ScanDir().sampleDepth(0).samplePattern("test.mc15_13TeV.361106.DAOD_IDTRKEL").filePattern("*").scan(sh, "/eliza18/atlas/dryu/ForwardElectrons/Data/")
+	
 	sh.setMetaString ("nc_tree", "CollectionTree");
 	sh.__getattribute__('print')()
 	job = ROOT.EL.Job()
@@ -35,7 +37,7 @@ def RunTestAnalysis():
 
 	# Add algorithms to job and submit
 	job.algsAdd(alg)
-	driver = ROOT.EL.DirectDriver()
+	driver = ROOT.EL.SoGEDriver()
 	submit_dir = "/eliza18/atlas/dryu/ForwardElectrons/Data/TestAnalysis/test_{}".format(datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
 	driver.submit(job, submit_dir)
 

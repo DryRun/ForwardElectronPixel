@@ -15,14 +15,24 @@
 
 #include "xAODRootAccess/Init.h"
 #include "RootUtils/HistogramManager.h"
+#include "ElectronPhotonSelectorTools/AsgElectronLikelihoodTool.h"
+#include "ElectronPhotonSelectorTools/AsgForwardElectronIsEMSelector.h"
+#include "xAODTracking/TrackParticlexAODHelpers.h"
+#include "xAODTracking/TrackParticleContainer.h"
+#include "xAODTracking/VertexContainer.h"
+#include "xAODTracking/TrackMeasurementValidationContainer.h"
+
 #include "AnalysisTools/DataAccess.h"
 #include "AnalysisTools/EventInfoDataAccess.h"
 #include "AnalysisTools/PixelClusterDataAccess.h"
 #include "AnalysisTools/ElectronDataAccess.h"
+#include "AnalysisTools/TrackDataAccess.h"
+#include "RootUtils/Constants.h"
 
 
 
-class TestAnalysis : public EL::Algorithm, public EventInfoDataAccess, public PixelClusterDataAccess, public ElectronDataAccess
+
+class TestAnalysis : public EL::Algorithm, public EventInfoDataAccess, public PixelClusterDataAccess, public ElectronDataAccess, public TrackDataAccess
 {
 public:
 	TestAnalysis();
@@ -49,6 +59,10 @@ public:
 private:
 	int processed_events_; //!
 	Root::HistogramManager *histograms_; //!
+	AsgElectronLikelihoodTool* electron_LH_tight_; //!
+	AsgForwardElectronIsEMSelector* forward_electron_LH_tight_; //!
+	AsgForwardElectronIsEMSelector* forward_electron_LH_medium_; //!
+	AsgForwardElectronIsEMSelector* forward_electron_LH_loose_; //!
 
 };
 
