@@ -36,9 +36,14 @@ cmt bro gmake
 # Run a test job
 cd $TestArea/WorkArea/run 
 cp /eliza18/atlas/dryu/ForwardElectrons/Derivation/workdir/*IDTRKVALID*sh . # Copy submission scripts
-sed -i "s_/eliza18/atlas/dryu/ForwardElectrons/Derivation_$FWD_EL_DIR/Derivation_" ./*IDTRKVALID*.sh # Change the hard-coded paths
+sed -i "s_/eliza18/atlas/dryu/ForwardElectrons/Derivation_$TestArea/Derivation_" ./*IDTRKVALID*.sh # Change the hard-coded paths
 
 # Submit derivation job to the batch system. 
 # '-l eliza18io=1' is required by the administrators to specify that the job uses eliza18. 
 # '-l h_vmem=6G' specifies a minimum of 6G memory
 qsub -l eliza18io=1 -l h_vmem=6G batch_test_ESD_to_DAOD_IDTRKVALID.sh 
+
+# To check the status of jobs:
+# qstat -u <username>
+# or
+# sgeusers
